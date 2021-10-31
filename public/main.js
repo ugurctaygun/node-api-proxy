@@ -9,15 +9,15 @@ const fetchWeather = async (city) => {
   const res = await fetch(url);
   const data = await res.json();
 
+  if (res.status === 429) {
+    alert("Too many request");
+    return;
+  }
+
   if (data.cod === "404") {
     alert("City not found");
     return;
   }
-
-  //   if (data.cod === "429 Too many requests") {
-  //     alert("Too many requests");
-  //     return;
-  //   }
 
   if (data.cod === 401) {
     alert("Invalid API Key");

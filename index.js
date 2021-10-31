@@ -9,8 +9,13 @@ const app = express();
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, //10 mins
+  windowMs: 10 * 60 * 100,
   max: 3,
+  statusCode: 429,
+  message: {
+    status: 429,
+    error: "Too many requests. Please try again in 10 minutes.",
+  },
 });
 app.use(limiter), app.set("trust proxy", 1);
 
